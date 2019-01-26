@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 11:42:11 by tkobb             #+#    #+#             */
-/*   Updated: 2019/01/26 12:45:13 by tkobb            ###   ########.fr       */
+/*   Updated: 2019/01/26 12:55:16 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	Game::renderObjects(WINDOW *window) const {
 		node->obj->render(window);
 		node = node->next;
 	}
+	wrefresh(window);
 }
 
 /*
@@ -51,6 +52,15 @@ void	Game::renderObjects(WINDOW *window) const {
 ** update the map with the new positions
 */
 void	Game::handleCollision(GameObject &prev, GameObjectListNode &node) {
+
+}
+
+
+/*
+** check is obj is in bounds
+** delete it if necesary, remove from object list and map
+*/
+void			checkBounds(GameObject &obj) {
 
 }
 
@@ -64,13 +74,14 @@ void	Game::updateObjects(void) {
 	while (node) {
 		GameObject prev(*node->obj);
 		node->obj->update();
+		checkBounds(*node->obj);
 		handleCollision(prev, *node);
 		node = node->next;
 	}
 }
 
 void	Game::run(WINDOW *window) {
-	while (true) {
+	while (true) { //TODO: Limit frame rate
 		updateObjects();
 		renderObjects(window);
 	}

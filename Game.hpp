@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 12:44:44 by tkobb            ###   ########.fr       */
+/*   Updated: 2019/01/26 12:54:03 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class Game
 		void			renderObjects(WINDOW *window) const;
 		void			updateObjects(void);
 		void			handleCollision(GameObject &prev, GameObjectListNode &node);
-		void			handleCollision(GameObject &prev, GameObject &obj);
+		void			checkBounds(GameObject &obj);
 
 };
 
