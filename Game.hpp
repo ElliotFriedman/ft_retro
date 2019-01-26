@@ -3,31 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   Game.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 11:17:57 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 12:44:44 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_HPP
 #define  GAME_HPP
 
-#include "GameObject.hpp"
+#include <GameObject.hpp>
+#include <GameObjectList.hpp>
+#include <curses.h>
 
 class Game
 {
 	protected:
-		int	xh;
-		int yh;
-		GameObject	*map[yh][xh];
-		
+		int	w;
+		int	h;
+		GameObjectList	objects;
+		GameObject		***map;
+
 	public:
-		Game(int _xw, int _yw);
+		Game(int _w, int _h);
 		Game(Game& copy);
 		~Game(void);
 		Game& operator=(Game& copyFrom);
-		void			run(void);
+		void			run(WINDOW *window);
+
+	private:
+		void			renderObjects(WINDOW *window) const;
+		void			updateObjects(void);
+		void			handleCollision(GameObject &prev, GameObjectListNode &node);
+		void			handleCollision(GameObject &prev, GameObject &obj);
 
 };
 
