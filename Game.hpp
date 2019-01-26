@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 11:17:57 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 11:40:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Game
 	protected:
 		int	xh;
 		int yh;
-		GameObject	*map[yh][xh];
+		GameObject	***map;
 		
 	public:
 		Game(int _xw, int _yw);
