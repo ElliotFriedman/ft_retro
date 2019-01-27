@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 17:02:10 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:17:09 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #define  BULLETOBJECT_HPP
 
 #include "GameObject.hpp"
+#include "LivingObject.hpp"
 
-class BulletObject : public GameObject
+class BulletObject : public LivingObject
 {
 	
 	public:
