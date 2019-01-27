@@ -70,3 +70,8 @@ char			GameObject::getEntity(void) const
 {
 	return entity;
 }
+
+bool            GameObject::isEnemy(void) const
+{
+	return enemy;
+}
