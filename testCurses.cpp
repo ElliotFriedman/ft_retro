@@ -1,4 +1,7 @@
 #include <ncurses.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <iostream>
 
 
 WINDOW *create_newwin(int height, int width, int starty, int startx);
@@ -38,12 +41,17 @@ void destroy_win(WINDOW *local_win)
 	delwin(local_win);
 }
 
+
 int main(int argc, char *argv[])
 {	WINDOW *my_win;
 	int startx, starty, width, height;
 	int ch;
 
-	initscr();
+	my_win = initscr();
+	//resizeterm(180, 180);
+
+	//extern NCURSES_EXPORT(SCREEN *) newterm (NCURSES_CONST char *,FILE *,FILE *);   /* implemented */
+
 	cbreak();			/* Line buffering disabled, Pass on
 					 * everty thing to me 		*/
 	keypad(stdscr, TRUE);		/* I need that nifty F1 	*/
@@ -54,10 +62,11 @@ int main(int argc, char *argv[])
 	startx = (COLS - width) / 2;	/* of the window		*/
 	printw("Press F1 to exit");
 	refresh();
+	std::cout << "\e[8;200;200t";
 	my_win = create_newwin(height, width, starty, startx);
-
 	while((ch = getch()) != KEY_F(1))
-	{	switch(ch)
+	{
+		switch(ch)
 		{	case KEY_LEFT:
 				destroy_win(my_win);
 				my_win = create_newwin(height, width, starty,--startx);
@@ -81,3 +90,18 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+// #include <signal.h>
+//      void* resizeHandler(int);
+
+//      int main(void) {
+//           ...
+//           signal(SIGWINCH, resizeHandler);
+//           ...
+//      }
+
+//      void* resizeHandler(int sig)
+//      {
+//           int nh, nw;
+//           getmaxyx(stdscr, nh, nw);  /* get the new screen size */
+//           ...
+//      }
