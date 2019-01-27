@@ -6,13 +6,14 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 11:42:11 by tkobb             #+#    #+#             */
-/*   Updated: 2019/01/26 17:15:49 by tkobb            ###   ########.fr       */
+/*   Updated: 2019/01/26 17:38:48 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Game.hpp>
 #include <GameObjectList.hpp>
 #include <Enemy.hpp>
+#include <chrono>
 
 Game::Game(int _w, int _h):
 	w(_w), h(_h) {
@@ -103,7 +104,10 @@ void	Game::updateObjects(void) {
 }
 
 void	Game::run(WINDOW *window) {
+	std::high_resolution_clock::time_point fps24;
+
 	while (true) { //TODO: Limit frame rate
+		
 		updateObjects();
 		renderObjects(window);
 	}
