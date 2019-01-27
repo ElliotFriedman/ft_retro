@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 12:11:33 by tkobb             #+#    #+#             */
-/*   Updated: 2019/01/26 12:44:14 by tkobb            ###   ########.fr       */
+/*   Updated: 2019/01/26 16:25:15 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include <GameObject.hpp>
 
 struct GameObjectListNode {
-	GameObject	*obj;
-	GameObjectListNode		*next;
+	GameObject			*obj;
+	GameObjectListNode	*next;
+	GameObjectListNode	*prev;
 };
 
 class GameObjectList {

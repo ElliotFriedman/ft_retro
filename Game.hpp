@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 15:39:23 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:03:38 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <GameObject.hpp>
 #include <GameObjectList.hpp>
 #include <curses.h>
+#define MIN(a, b) ((a)>(b)?(a):(b))
+#define MAX(a, b) ((a)<(b)?(a):(b))
 
 class Game
 {
