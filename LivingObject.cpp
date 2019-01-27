@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   LivingObject.hpp                                     :+:      :+:    :+:   */
+/*   LivingObject.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 17:31:05 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 20:16:01 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,3 +102,10 @@ bool            LivingObject::isEnemy(void) const
 {
 	return enemy;
 }
+
+bool			LivingObject::takeDamage(void)
+{
+	lives--;
+	return lives > 0 ? true : false;
+}
+

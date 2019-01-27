@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 17:24:55 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 20:17:08 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ class LivingObject// : public GameObject
 		LivingObject(LivingObject& copy);
 		~LivingObject(void);
 		LivingObject& operator=(LivingObject& copyFrom);
-		int		getLives(void) const;
-		bool	takeDamage(void);
+		int				getLives(void) const;
 		void			update(void);
 		void			shift(void);
 		int				getX(void) const;
@@ -46,6 +45,7 @@ class LivingObject// : public GameObject
 		bool			isEnemy(void) const;
 		char			getEntity(void) const;
 		virtual void	render(WINDOW *window) const;
+		bool			takeDamage(void);
 };
 
 #endif

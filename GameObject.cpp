@@ -75,3 +75,9 @@ bool            GameObject::isEnemy(void) const
 {
 	return enemy;
 }
+/*
+bool			takeDamage()
+{
+	if (lives
+}
+*/

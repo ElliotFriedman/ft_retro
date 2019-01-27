@@ -1,37 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Game.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/26 11:42:11 by tkobb             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/01/26 17:38:48 by efriedma         ###   ########.fr       */
-=======
-/*   Updated: 2019/01/26 17:25:24 by tkobb            ###   ########.fr       */
->>>>>>> f67171a9c69ca617447c88668895477360fedf89
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <Game.hpp>
 #include <GameObjectList.hpp>
 #include <Enemy.hpp>
 #include <chrono>
+#include <LivingObject.hpp>
 
 Game::Game(int _w, int _h):
 	w(_w), h(_h) {
-	map = new GameObject**[w];
-	for (int x = 0; x < h; x++) {
-		map[x] = new GameObject*;
+		map = new LivingObject**[w];
+		for (int x = 0; x < h; x++) {
+			map[x] = new LivingObject*;
+		}
 	}
-}
 
 Game::Game(Game &copyFrom):
 	w(copyFrom.w), h(copyFrom.h) {
-	objects = copyFrom.objects;
-	map = copyFrom.map;
-}
+		objects = copyFrom.objects;
+		map = copyFrom.map;
+	}
 
 Game	&Game::operator=(Game &rhs) {
 	w = rhs.w;
@@ -43,7 +28,7 @@ Game	&Game::operator=(Game &rhs) {
 
 void	Game::renderObjects(WINDOW *window) const {
 	GameObjectListNode	*node;
-	
+
 	node = objects.getHead();
 	while (node) {
 		node->obj->render(window);
@@ -53,11 +38,11 @@ void	Game::renderObjects(WINDOW *window) const {
 }
 
 /*
-** for each x, y between prev and obj, check map for other objects and handle
-** remove node from list if an object gets destroyed
-** update the map with the new positions
-*/
-void	Game::handleCollision(GameObject &prev, GameObjectListNode &node) {
+ ** for each x, y between prev and obj, check map for other objects and handle
+ ** remove node from list if an object gets destroyed
+ ** update the map with the new positions
+ */
+void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node) {
 	int	sy = MIN(prev.getY(), node.obj->getY());
 	int	my = MAX(prev.getY(), node.obj->getY());
 	int	sx = MIN(prev.getX(), node.obj->getX());
@@ -83,10 +68,10 @@ void	Game::handleCollision(GameObject &prev, GameObjectListNode &node) {
 }
 
 /*
-** check is obj is in bounds
-** delete it if necesary, remove from object list and map
-*/
-void	Game::checkBounds(GameObject &obj) {
+ ** check is obj is in bounds
+ ** delete it if necesary, remove from object list and map
+ */
+void	Game::checkBounds(LivingObject &obj) {
 	int x = obj.getX();
 	int y = obj.getY();
 	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
@@ -95,14 +80,14 @@ void	Game::checkBounds(GameObject &obj) {
 }
 
 /*
-** Update objects, check for collisions, delete if necesary
-*/
+ ** Update objects, check for collisions, delete if necesary
+ */
 void	Game::updateObjects(void) {
 	GameObjectListNode	*node;
 
 	node = objects.getHead();
 	while (node) {
-		GameObject prev(*node->obj);
+		LivingObject prev(*node->obj);
 		node->obj->update();
 		checkBounds(*node->obj);
 		handleCollision(prev, *node);
@@ -111,10 +96,32 @@ void	Game::updateObjects(void) {
 }
 
 void	Game::run(WINDOW *window) {
-	std::high_resolution_clock::time_point fps24;
+	//std::high_resolution_clock::time_point fps24;
+	std::chrono::time_point<std::chrono::system_clock> start, end; 
+	std::chrono::duration<double> elapsed_seconds;
+
+
+	start = std::chrono::system_clock::now(); 
+	end = std::chrono::system_clock::now(); 
+	elapsed_seconds = end - start;
 
 	while (true) { //TODO: Limit frame rate
-		
+		int i = 0;
+		while ( i < 48 )
+		{
+			end = std::chrono::system_clock::now();
+			start = std::chrono::system_clock::now();
+			elapsed_seconds = end - start;
+			//this tells us how long till we refresh frames
+			while (elapsed_seconds.count() < 0.0207f)
+			{
+				elapsed_seconds = end - start;
+				end = std::chrono::system_clock::now();
+			}
+			i++;
+			std::cout << std::to_string(i) + "\n";
+		}
+
 		updateObjects();
 		renderObjects(window);
 	}
