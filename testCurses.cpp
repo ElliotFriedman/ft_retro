@@ -61,8 +61,6 @@ int main(int argc, char *argv[])
 	starty = (LINES - height) / 2;	/* Calculating for a center placement */
 	startx = (COLS - width) / 2;	/* of the window		*/
 	printw("Press F1 to exit");
-	refresh();
-	std::cout << "\e[8;200;200t";
 	my_win = create_newwin(height, width, starty, startx);
 	while((ch = getch()) != KEY_F(1))
 	{
@@ -84,7 +82,7 @@ int main(int argc, char *argv[])
 				my_win = create_newwin(height, width, ++starty,startx);
 				break;	
 		}
-	}
+	} 
 		
 	endwin();			/* End curses mode		  */
 	return 0;

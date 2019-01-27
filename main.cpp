@@ -13,11 +13,15 @@
 
 #include <Game.hpp>
 #include <curses.h>
+#include <iostream>
 
 int		main(void) {
 	Game	game(COLS, LINES);
 	WINDOW	*window = NULL;
 
 
+
 	game.run(window);
+	game.put_text("Press F1 to exit");
+
 }
