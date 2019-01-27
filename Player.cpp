@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 13:00:35 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 16:30:33 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Player.hpp"
 #include <iostream>
 
-PlayerObject::PlayerObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv) : GameObject(_enemy, _entity, _xp, _yp, _xv, _yv)
+PlayerObject::PlayerObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives) : /*GameObject(_enemy, _entity, _xp, _yp, _xv, _yv),*/ LivingObject(_enemy, _entity, _xp, _yp, _xv, _yv, _lives)
 {
 	std::cout << "Player Object Constructor Called\n";
 }

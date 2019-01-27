@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:18:30 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 15:41:14 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:03:43 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int main()
 	char	board[10][10];
 
 	std::cout << "\n\n";
-	EnemyObject a(false, 'E', 5, 5, 1, 0);
+	EnemyObject a(false, 'E', 5, 5, 1, 0, 5);
 	/*
 	   std::cout << "X: " + std::to_string(a.getX()) + "\n";
 	   std::cout << "Y: " + std::to_string(a.getY()) + "\n";
@@ -101,7 +101,7 @@ int main()
 	   printmap(board);
 	   */
 
-	BulletObject b(false, 'B', 0, 0, 1, 0);
+	BulletObject b(false, 'B', 0, 0, 5, 0);
 
 	int i = 0;
 
