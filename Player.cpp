@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 16:30:33 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 23:17:11 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ PlayerObject::PlayerObject(bool _enemy, char _entity, int _xp, int _yp, int _xv,
 	std::cout << "Player Object Constructor Called\n";
 }
 
-PlayerObject::PlayerObject(PlayerObject& copy) : GameObject(copy.enemy, copy.entity, copy.xp, copy.yp, copy.xv, copy.yv)
+PlayerObject::PlayerObject(PlayerObject& copy) : LivingObject(copy.enemy, copy.entity, copy.xp, copy.yp, copy.xv, copy.yv, copy.lives)
 {
 	std::cout << "Player Object Copy Constructor Called\n";
 }

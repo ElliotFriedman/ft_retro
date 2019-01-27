@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:18:30 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 17:50:21 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 23:36:38 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	printmap(char board[10][10])
 		i++;
 	}
 }
+void	placemap(char board[10][10], LivingObject& a)
+{
+	board[a.getY()][a.getX()] = a.getEntity();
+}
+
 
 void	placemap(char board[10][10], EnemyObject& a)
 {
@@ -63,27 +68,15 @@ void	clearmap(char board[10][10])
 
 int main()
 {
-//	char	board[10][10];
+	char	board[10][10];
 
-	std::chrono::high_resolution_clock::time_point fps24 = std::chrono::high_resolution_clock::now();
 	
 //	std::cout << std::to_string(fps24);
-
 	std::cout << "\n\n";
 
-
-	std::chrono::high_resolution_clock::time_point fps24end = std::chrono::high_resolution_clock::now();
 	
-
-	std::cout << "\n\n";
-
-	std::chrono::auto duration = std::chrono::duration_cast<microseconds>(fps24 - fps24end); 
-  
-	std::cout << "Time taken by function: "
-         << duration.count() << " microseconds" << std::endl; 
-		
-//	EnemyObject a(false, 'E', 5, 5, 1, 0, 5);
-	/*
+	BulletObject a(false, 'E', 5, 5, 1, 0);
+	
 	   std::cout << "X: " + std::to_string(a.getX()) + "\n";
 	   std::cout << "Y: " + std::to_string(a.getY()) + "\n";
 	   std::cout << "\n\n";
@@ -91,7 +84,7 @@ int main()
 	   clearmap(board);
 	   placemap(board, a);
 	   printmap(board);
-
+	/*
 
 	   std::cout << "X: " + std::to_string(a.getX()) + "\n";
 	   std::cout << "Y: " + std::to_string(a.getY()) + "\n";

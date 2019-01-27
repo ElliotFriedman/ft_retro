@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 20:17:08 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 23:25:22 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class LivingObject// : public GameObject
 	public:
 		LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives);
 		LivingObject(LivingObject& copy);
-		~LivingObject(void);
+		virtual ~LivingObject(void);
 		LivingObject& operator=(LivingObject& copyFrom);
 		int				getLives(void) const;
 		void			update(void);

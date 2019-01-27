@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 20:16:01 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 23:47:41 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,6 @@ int			LivingObject::getLives(void) const
 	return lives;
 }
 
-bool		LivingObject::takeDamage(void)
-{
-	if (lives >= 1)
-		lives--;
-	return lives > 0 ? true : false;
-}
-
 void	LivingObject::update(void)
 {
 	xp += xv;
@@ -105,7 +98,6 @@ bool            LivingObject::isEnemy(void) const
 
 bool			LivingObject::takeDamage(void)
 {
-	lives--;
-	return lives > 0 ? true : false;
+	std::cout << "Took damage\n";
+	return --lives > 0 ? true : false;
 }
-

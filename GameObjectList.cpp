@@ -3,7 +3,7 @@
 /* Node */
 
 GameObjectListNode::GameObjectListNode(GameObject &obj):
-	obj(&obj), next(nullptr), prev(nullptr)
+	obj(obj), next(nullptr), prev(nullptr)
 {
 
 }

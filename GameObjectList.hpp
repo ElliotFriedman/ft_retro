@@ -1,9 +1,10 @@
 #ifndef GAME_OBJECT_LIST
 #define  GAME_OBJECT_LIST
 #include <GameObject.hpp>
+#include <LivingObject.hpp>
 
 struct GameObjectListNode {
-	GameObject			*obj;
+	LivingObject		*obj;
 	GameObjectListNode	*next;
 	GameObjectListNode	*prev;
 public:
@@ -23,7 +24,7 @@ public:
 	GameObjectList		&operator=(GameObjectList &rhs);
 	GameObjectListNode	*getHead(void) const;
 	void				add(GameObject &obj);
-	void				remove(GameObject &obj);
+	void				remove(LivingObject &obj);
 	void				remove(GameObjectListNode &node);
 };
 

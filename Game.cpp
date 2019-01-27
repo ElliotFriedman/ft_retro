@@ -54,11 +54,17 @@ void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node) {
 			if (map[y][x]) {
 				if (map[y][x]->isEnemy() != node.obj->isEnemy()) {
 					if (map[y][x]->takeDamage() == false) {
+
+						//figure out how to delete this properly
 						delete map[y][x];
+
 						map[y][x] = nullptr;
+
 					}
 					if (node.obj->takeDamage() == false) {
+					
 						objects.remove(*node.obj);
+						
 						delete node.obj;
 					}
 				}
@@ -106,23 +112,27 @@ void	Game::run(WINDOW *window) {
 	elapsed_seconds = end - start;
 
 	while (true) { //TODO: Limit frame rate
-		int i = 0;
-		while ( i < 48 )
+		//		int i = 0;
+		//		while ( i < 48 )
+		//		{
+		end = std::chrono::system_clock::now();
+		start = std::chrono::system_clock::now();
+		elapsed_seconds = end - start;
+		//this tells us how long till we refresh frames
+		while (elapsed_seconds.count() < 0.0207f)
 		{
-			end = std::chrono::system_clock::now();
-			start = std::chrono::system_clock::now();
+			//always update keystrokes
+			updateObjects();
 			elapsed_seconds = end - start;
-			//this tells us how long till we refresh frames
-			while (elapsed_seconds.count() < 0.0207f)
-			{
-				elapsed_seconds = end - start;
-				end = std::chrono::system_clock::now();
-			}
-			i++;
-			std::cout << std::to_string(i) + "\n";
+			end = std::chrono::system_clock::now();
 		}
-
-		updateObjects();
+		//			i++;
+		//update 48 times a second
 		renderObjects(window);
+		//			std::cout << std::to_string(i) + "\n";
+		//		}
+
+		//updateObjects();
+		//renderObjects(window);
 	}
 }

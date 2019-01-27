@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 15:41:34 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 15:41:37 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/26 23:38:25 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		main(void) {
 	Game	game(COLS, LINES);
-	WINDOW	*window;
+	WINDOW	*window = NULL;
 
 
 	game.run(window);
