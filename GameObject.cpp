@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   GameObject.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 15:08:31 by efriedma         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "GameObject.hpp"
 
 GameObject::GameObject(
@@ -81,4 +69,9 @@ int				GameObject::getY(void) const
 char			GameObject::getEntity(void) const
 {
 	return entity;
+}
+
+bool            GameObject::isEnemy(void) const
+{
+	return enemy;
 }

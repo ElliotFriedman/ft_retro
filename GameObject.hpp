@@ -23,6 +23,7 @@ class GameObject
 		void			shift(void);
 		int				getX(void) const;
 		int				getY(void) const;
+		bool			isEnemy(void) const;
 		char			getEntity(void) const;
 		virtual void	render(WINDOW *window) const;
 };
