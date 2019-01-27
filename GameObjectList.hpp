@@ -6,10 +6,15 @@ struct GameObjectListNode {
 	GameObject			*obj;
 	GameObjectListNode	*next;
 	GameObjectListNode	*prev;
+public:
+	GameObjectListNode(GameObject &obj);
+	~GameObjectListNode(void);
+	GameObjectListNode(GameObjectListNode &copyFrom);
+	GameObjectListNode	&operator=(GameObjectListNode &rhs);
 };
 
 class GameObjectList {
-	GameObjectListNode	head;
+	GameObjectListNode	*head;
 
 public:
 	GameObjectList(void);

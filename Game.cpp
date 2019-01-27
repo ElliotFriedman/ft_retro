@@ -6,7 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 11:42:11 by tkobb             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/01/26 17:38:48 by efriedma         ###   ########.fr       */
+=======
+/*   Updated: 2019/01/26 17:25:24 by tkobb            ###   ########.fr       */
+>>>>>>> f67171a9c69ca617447c88668895477360fedf89
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +58,23 @@ void	Game::renderObjects(WINDOW *window) const {
 ** update the map with the new positions
 */
 void	Game::handleCollision(GameObject &prev, GameObjectListNode &node) {
-	int	sy = MIN(prev.getY(), node.obj->getY()); // start y
-	int	my = MAX(prev.getY(), node.obj->getY()); // max y
+	int	sy = MIN(prev.getY(), node.obj->getY());
+	int	my = MAX(prev.getY(), node.obj->getY());
 	int	sx = MIN(prev.getX(), node.obj->getX());
 	int	mx = MAX(prev.getX(), node.obj->getX());
 	int x, y;
 
 	for (x = sx; x <= mx; x++) {
 		for (y = sy; y <= my; y++) {
-			if (map[y][x]) { // collide the two objects
+			if (map[y][x]) {
 				if (map[y][x]->isEnemy() != node.obj->isEnemy()) {
-					if (map[y][x]->isEnemy()) {
-						
-					} else {
-						
+					if (map[y][x]->takeDamage() == false) {
+						delete map[y][x];
+						map[y][x] = nullptr;
+					}
+					if (node.obj->takeDamage() == false) {
+						objects.remove(*node.obj);
+						delete node.obj;
 					}
 				}
 			}
