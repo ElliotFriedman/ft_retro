@@ -22,14 +22,25 @@ LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv,
 	enemy = _enemy;
 	entity = _entity;	
 	lives = _lives;
-	std::cout << "Living Object Constructor Called\n";
+	//std::cout << "Living Object Constructor Called\n";
 	framecount = _framecount;
 	if (lives < 1)
 		std::cout << "Error, you must initialize a living object with lives\n\n";
 }
 
-LivingObject::LivingObject(void) {
+LivingObject::LivingObject(void)
+{
+	xp = 1;
+	yp = 1;
+	xv = 1;
+}
+
+
+LivingObject::LivingObject(int _x, int _y) {
 	framecount = -1;
+	xp = _x;
+	yp = _y;
+	xv = 1;
 	entity = ' ';
 };
 
@@ -49,7 +60,7 @@ LivingObject::LivingObject(LivingObject& copy)// : LivingObject(copy.enemy, copy
 
 LivingObject::~LivingObject(void)
 {
-	std::cout << "Living Object Destructor Called\n";
+	//std::cout << "Living Object Destructor Called\n";
 }
 
 LivingObject&  LivingObject::operator=(LivingObject& copyFrom)
@@ -64,6 +75,20 @@ LivingObject&  LivingObject::operator=(LivingObject& copyFrom)
 	framecount = copyFrom.framecount;
 	return *this;
 }
+
+LivingObject*  LivingObject::operator=(LivingObject* copyFrom)
+{
+	xp = copyFrom->xp;
+	yp = copyFrom->yp;
+	xv = copyFrom->xv;
+	yv = copyFrom->yv;
+	enemy = copyFrom->enemy;
+	entity = copyFrom->entity;	
+	lives = copyFrom->lives;
+	framecount = copyFrom->framecount;
+	return this;
+}
+
 
 int			LivingObject::getLives(void) const
 {
@@ -105,6 +130,7 @@ bool			LivingObject::takeDamage(void)
 void				LivingObject::setDead(void)
 {
 	this->framecount = -1;
+	this->entity = ' ';
 }
 
 int				LivingObject::getVecX(void)
@@ -148,3 +174,33 @@ int			LivingObject::liveChange(int number)
 // {
 // 	this->entity = E;
 // }
+
+void	LivingObject::createBullet(bool _enemy, int _xp, int _yp, int _xv, int _yv, int _framecount)
+{
+	_yv = 0;
+	yv = 0;
+	xv = _xv;
+	enemy = _enemy;
+	entity = BULLET;
+	framecount = _framecount;
+	xp = _xp;
+	yp = _yp;
+}
+
+void			LivingObject::setEntity(char c)
+{
+	this->entity = c;
+}
+
+void			LivingObject::setEntity(char c, int _x, int _y)
+{
+	this->xp = _x;
+	this->yp = _y;
+	this->xv = 1;
+	this->entity = c;
+}
+
+void		LivingObject::setPX(int _x)
+{
+	this->xp = _x;
+}

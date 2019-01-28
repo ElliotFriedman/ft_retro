@@ -15,7 +15,18 @@
 #include <curses.h>
 #include <iostream>
 
+# define COLS 40
+# define LINES 40
+
 int		main(void) {
 	Game	game(COLS, LINES);
-	game.run();
+	
+	game.testLitterMap();
+		game.dumpMap();
+	
+	game.updateObjects();
+
+	std::cout << "\n";
+		game.dumpMap();
+	//game.run();
 }
