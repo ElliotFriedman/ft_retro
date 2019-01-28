@@ -1,105 +1,137 @@
 #include <ncurses.h>
-#include <stdlib.h>
-#include <signal.h>
 #include <iostream>
 
-
-WINDOW *create_newwin(int height, int width, int starty, int startx);
-void destroy_win(WINDOW *local_win);
+#define EMPTY     ' '
+#define LEN       400
 
 WINDOW *create_newwin(int height, int width, int starty, int startx)
-{	WINDOW *local_win;
+{
+	WINDOW *local_win;
 
 	local_win = newwin(height, width, starty, startx);
-	box(local_win, 0 , 0);		/* 0, 0 gives default characters 
-					 * for the vertical and horizontal
-					 * lines			*/
-	wrefresh(local_win);		/* Show that box 		*/
-
+	box(local_win, 0 , 0);
+	wrefresh(local_win);	
 	return local_win;
 }
 
 void destroy_win(WINDOW *local_win)
 {	
-	/* box(local_win, ' ', ' '); : This won't produce the desired
-	 * result of erasing the window. It will leave it's four corners 
-	 * and so an ugly remnant of window. 
-	 */
 	wborder(local_win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
-	/* The parameters taken are 
-	 * 1. win: the window on which to operate
-	 * 2. ls: character to be used for the left side of the window 
-	 * 3. rs: character to be used for the right side of the window 
-	 * 4. ts: character to be used for the top side of the window 
-	 * 5. bs: character to be used for the bottom side of the window 
-	 * 6. tl: character to be used for the top left corner of the window 
-	 * 7. tr: character to be used for the top right corner of the window 
-	 * 8. bl: character to be used for the bottom left corner of the window 
-	 * 9. br: character to be used for the bottom right corner of the window
-	 */
 	wrefresh(local_win);
 	delwin(local_win);
 }
 
+int moveOk(int y, int x)
+{
+	int testChar;
+
+	testChar = mvinch(y, x);
+	return (testChar == EMPTY);
+}
+
+void	seedMap(int storx[LEN], int story[LEN], int yOff)
+{
+	for (int x = 0; x < LEN; x++)
+	{
+		int y = std::rand() % 10 + yOff;
+		int sx = std::rand() % LEN - 300;
+
+		if (std::rand() % 2)
+		{
+			mvaddch(y, sx, 'b');
+			storx[x] = sx;
+			story[x] = y;
+		}
+	}
+}
+
+void	winRefresh(int storx[LEN], int story[LEN], int yOff)
+{
+	for (int x = 0; x < LEN; x++)
+		{
+			mvaddch(story[x], storx[x], ' ');
+			storx[x] += 1;
+			mvaddch(story[x], storx[x], 'b');
+			if (storx[x] == COLS && x + 5 >= LEN)
+				seedMap(storx, story, yOff);
+		}
+}
 
 int main(int argc, char *argv[])
-{	WINDOW *my_win;
+{
+	WINDOW *my_win;
 	int startx, starty, width, height;
 	int ch;
 
-	my_win = initscr();
-	//resizeterm(180, 180);
+	srand(std::time(nullptr));
 
-	//extern NCURSES_EXPORT(SCREEN *) newterm (NCURSES_CONST char *,FILE *,FILE *);   /* implemented */
+	initscr();
+	cbreak();
+	keypad(stdscr, TRUE);
+	noecho();
 
-	cbreak();			/* Line buffering disabled, Pass on
-					 * everty thing to me 		*/
-	keypad(stdscr, TRUE);		/* I need that nifty F1 	*/
+	height = 1;
+	width = 1;
+	starty = (LINES - height) / 2;
+	startx = (COLS - width) / 2;
+	printw("Press F1 to exit, lines: %d, cols: %d\n", LINES, COLS);
+	refresh();
+	my_win = newwin(height, width, starty, startx);
 
-	height = 3;
-	width = 10;
-	starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	startx = (COLS - width) / 2;	/* of the window		*/
-	printw("Press F1 to exit");
-	my_win = create_newwin(height, width, starty, startx);
+	mvaddch(starty, startx, '^');
+
+	int i = 0;
+	int storx[LEN];
+	int	story[LEN];
+	timeout(20);
+//	wtimeout(my_win, 1);
+	seedMap(storx, story, 0);
+	int storx1[LEN];
+	int	story1[LEN];
+	seedMap(storx1, story1, 50);
+	
 	while((ch = getch()) != KEY_F(1))
 	{
+		winRefresh(storx1, story1, 50);
+		winRefresh(storx, story, 0);
+		mvaddch(starty, startx, '^');
+		move(starty, startx);
 		switch(ch)
-		{	case KEY_LEFT:
-				destroy_win(my_win);
-				my_win = create_newwin(height, width, starty,--startx);
+		{
+			case KEY_LEFT:
+				if (moveOk(starty, startx - 1))
+				{
+					mvaddch(starty, startx, ' ');
+					startx--;
+				}
 				break;
 			case KEY_RIGHT:
-				destroy_win(my_win);
-				my_win = create_newwin(height, width, starty,++startx);
+				if (moveOk(starty, startx + 1))
+				{
+					mvaddch(starty, startx, ' ');
+					startx++;
+				}
 				break;
 			case KEY_UP:
-				destroy_win(my_win);
-				my_win = create_newwin(height, width, --starty,startx);
+				if (moveOk(starty - 1, startx))
+				{
+					mvaddch(starty, startx, ' ');
+					starty--;
+				}
 				break;
 			case KEY_DOWN:
-				destroy_win(my_win);
-				my_win = create_newwin(height, width, ++starty,startx);
+				if (moveOk(starty + 1, startx))
+				{
+					mvaddch(starty, startx, ' ');
+					starty++;
+				}
 				break;	
+			default:
+				break;
 		}
-	} 
-		
-	endwin();			/* End curses mode		  */
+		i++;
+	}
+	endwin();
+	std::cout << "ran loop " + std::to_string(i) + " times\n";
 	return 0;
 }
-
-// #include <signal.h>
-//      void* resizeHandler(int);
-
-//      int main(void) {
-//           ...
-//           signal(SIGWINCH, resizeHandler);
-//           ...
-//      }
-
-//      void* resizeHandler(int sig)
-//      {
-//           int nh, nw;
-//           getmaxyx(stdscr, nh, nw);  /* get the new screen size */
-//           ...
-//      }
