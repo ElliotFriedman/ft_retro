@@ -50,21 +50,25 @@ int		Game::checkBounds(LivingObject &obj) {
 int		Game::checkCollision(int x, int y)
 {
 	int vec_x = map[y][x].getVecX();
-	int vec_y  = map[y][x].getVecY();
 
-	if (!map[y + vec_y][x + vec_x].isAlive())
+	int i = x;
+	while (i < x + vec_x)
 	{
-		map[y][x].setDead();
-		map[y + vec_y][x + vec_x].setDead();
-		return 0;
+		if (map[y][x + i].isAlive())
+		{
+			map[y][x].setDead();
+			map[y][x + i].setDead();
+			return 0;
+		}	 
+		i++;
 	}
 	return 1;
 }
 
 int		Game::moveObject(int x, int y)
 {
-	if (w > x || 
-	int vec_x = map[y][x].getVecX();
+	if (w > x ||) 
+		int vec_x = map[y][x].getVecX();
 	int vec_y  = map[y][x].getVecY();
 
 	map[y + vec_y][x + vec_x] = map[y][x];
