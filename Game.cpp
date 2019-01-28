@@ -43,12 +43,6 @@ Game	&Game::operator=(Game &rhs) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
-<<<<<<< HEAD
-int		Game::checkBounds(LivingObject &obj) {
-	int x = obj.getX() + obj.getVecX();
-	int y = obj.getY() + obj.getVecY();
-	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
-=======
 int		Game::checkBounds(LivingObject &obj)
 {
 	int x = obj.getX();
@@ -58,7 +52,6 @@ int		Game::checkBounds(LivingObject &obj)
 
 	if ((x < 0 || x >= w) || (y < 0 || y >= h) || (nextPOS >= w))
 	{
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 		obj.setDead();
 		return (0);
 	}
@@ -69,14 +62,10 @@ int		Game::checkCollision(int x, int y)
 {
 	int vec_x = map[y][x].getVecX();
 
-<<<<<<< HEAD
-	if (map[y + vec_y][x + vec_x].getFramecount() > 0)
-=======
 	int i = x;
 	while (i < x + vec_x)
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 	{
-		if (map[y][x + i].isAlive())
+		if (map[y][x + vec_x].getFramecount() > 0)
 		{
 			map[y][x].setDead();
 			map[y][x + i].setDead();
@@ -131,9 +120,6 @@ void	Game::dumpMap(void)
 		}
 		std::cout << "\n";
 	}
-<<<<<<< HEAD
-}
-=======
 }
 
 void	Game::testLitterMap(void)
@@ -143,12 +129,9 @@ void	Game::testLitterMap(void)
 	{
 		for (int x = 0; x < w; x++)
 		{
-			if (total % 5 == 0)
-				map[y][x].setEntity('E');
-			else if (total % 7 == 0)
-				map[y][x].setEntity('.');
-			else
-				map[y][x].setEntity(' ');
+//			if (total % 5 == 0)
+//			else if (total % 7 == 0)
+//			else
 			total++;
 		}
 	}
@@ -316,4 +299,3 @@ void	Game::run(void)
 	delete p;
 	std::cout << "ran loop " + std::to_string(i) + " times\n";
 }
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
