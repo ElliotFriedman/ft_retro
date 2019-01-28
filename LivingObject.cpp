@@ -73,13 +73,6 @@ void	LivingObject::update(void)
 	yp += yv;
 }
 
-//virtual and will be overriden in child classes
-// void	LivingObject::render(WINDOW *window) const
-// {
-// 	//make ncurses call with char entity
-// 	mvwaddch(window, yp, xp, entity);
-// }
-
 int				LivingObject::getX(void) const
 {
 	return xp;
@@ -148,4 +141,9 @@ int			LivingObject::liveChange(int number)
 	if (this->lives > 0)
 		return this->lives;
 	return 0;
+}
+
+void		LivingObject::setEntity(char E)
+{
+	this->entity = E;
 }

@@ -13,9 +13,8 @@
 #ifndef LIVINGOBJECT_HPP
 #define  LIVINGOBJECT_HPP
 
-//#include "GameObject.hpp"
 
-class LivingObject// : public GameObject
+class LivingObject
 {
 	protected:
 		int		alive;
@@ -27,12 +26,6 @@ class LivingObject// : public GameObject
 		bool	enemy;
 		char	entity;
 	
-	/*	
-		GameObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv);
-		GameObject(GameObject& copy);
-		~GameObject(void);
-		GameObject& operator=(GameObject& copyFrom);
-	*/
 	public:
 		LivingObject(void);
 		LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives);
@@ -46,7 +39,6 @@ class LivingObject// : public GameObject
 		int				getY(void) const;
 		bool			isEnemy(void) const;
 		char			getEntity(void) const;
-//		virtual void	render(WINDOW *window) const;
 		bool			takeDamage(void);
 		int				getCount(void);
 		void			setAlive(int number);
@@ -55,6 +47,7 @@ class LivingObject// : public GameObject
 		int				getVecY(void);
 		int				isAlive(void);
 		int				liveChange(int number);
+		void			setEntity(char E);
 };
 
 #endif
