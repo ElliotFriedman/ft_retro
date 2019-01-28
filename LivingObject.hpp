@@ -18,6 +18,7 @@
 class LivingObject// : public GameObject
 {
 	protected:
+		int		alive;
 		int		lives;
 		int		xp;
 		int		yp;
@@ -33,6 +34,7 @@ class LivingObject// : public GameObject
 		GameObject& operator=(GameObject& copyFrom);
 	*/
 	public:
+		LivingObject(void);
 		LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives);
 		LivingObject(LivingObject& copy);
 		virtual ~LivingObject(void);
@@ -46,6 +48,13 @@ class LivingObject// : public GameObject
 		char			getEntity(void) const;
 		virtual void	render(WINDOW *window) const;
 		bool			takeDamage(void);
+		int				getCount(void);
+		void			setAlive(int number);
+		void			setDead(void);
+		int				getVecX(void);
+		int				getVecY(void);
+		int				isAlive(void);
+		int				liveChange(int number);
 };
 
 #endif

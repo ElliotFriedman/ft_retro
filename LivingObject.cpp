@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "LivingObject.hpp"
-#include "LivingObject.hpp"
 #include <iostream>
 
 LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives)// : enemy(_enemy), entity(_entity), xp(_xp), yp(_yp), xv(_xv), yv(_yv), lives(_lives)
@@ -27,6 +26,10 @@ LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv,
 	if (lives < 1)
 		std::cout << "Error, you must initialize a living object with lives\n\n";
 }
+
+LivingObject::LivingObject(void) {
+	alive = -1;
+};
 
 LivingObject::LivingObject(LivingObject& copy)// : LivingObject(copy.enemy, copy.entity, copy.xp, copy.yp, copy.xv, copy.yv)
 {
@@ -100,4 +103,48 @@ bool			LivingObject::takeDamage(void)
 {
 	std::cout << "Took damage\n";
 	return --lives > 0 ? true : false;
+}
+
+int				LivingObject::getCount(void)
+{
+	return (alive);
+}
+
+void				LivingObject::setAlive(int number)
+{
+	this->alive = number;
+}
+
+void				LivingObject::setDead(void)
+{
+	this->alive = -1;
+}
+
+int				LivingObject::getVecX(void)
+{
+	return (this->xv);
+}
+
+int				LivingObject::getVecY(void)
+{
+	return (this->yv);
+}
+
+int				LivingObject::isAlive(void)
+{
+	if (this->alive > 0)
+		return 1;
+	return 0;
+}
+
+/*
+*Will change object live count (up or down) and return 0 is object is dead and 1 if still alive
+*/
+
+int			LivingObject::liveChange(int number)
+{
+	this->lives += number;
+	if (this->lives > 0)
+		return this->lives;
+	return 0;
 }

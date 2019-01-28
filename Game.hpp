@@ -11,36 +11,44 @@
 /* ************************************************************************** */
 
 #ifndef GAME_HPP
-#define  GAME_HPP
+# define  GAME_HPP
 
-#include <LivingObject.hpp>
-#include <GameObject.hpp>
-#include <GameObjectList.hpp>
-#include <curses.h>
-#define MIN(a, b) ((a)>(b)?(a):(b))
-#define MAX(a, b) ((a)<(b)?(a):(b))
+# include "LivingObject.hpp"
+# include <GameObject.hpp>
+# include "Enemy.hpp"
+# include "Bullet.hpp"
+# include <curses.h>
+# define MIN(a, b) ((a)>(b)?(a):(b))
+# define MAX(a, b) ((a)<(b)?(a):(b))
 
 class Game
 {
 	protected:
 		int	w;
 		int	h;
-		GameObjectList	objects;
-		LivingObject	***map;
+		int frame_count;	//keep track of frame count. When objects on map are alive they will keep the frame count in alive to know its been updated each frame
+
+		LivingObject	*player = new LivingObject();
+		LivingObject	*enemy = new LivingObject[50]();//enemy_bool, char, xp, xp, yv, yv, lives
+		BulletObject	*bullets = new BulletObject[50]();
+		LivingObject	**map;
 
 	public:
 		Game(int _w, int _h);
 		Game(Game& copy);
 		~Game(void);
 		Game& operator=(Game& copyFrom);
-		void			run(WINDOW *window);
-		void			checkBounds(LivingObject &obj);
-		void			handleCollision(LivingObject &prev, GameObjectListNode &node);
+		void		run(WINDOW *window);
+		int			checkBounds(LivingObject &obj);
+		int			checkCollision(int x, int y);
+		int			moveObject(int x, int y);
+
+		void		handleCollision(LivingObject &prev, GameObjectListNode &node);
 	private:
-		void			renderObjects(WINDOW *window) const;
-		void			updateObjects(void);
-//		void			handleCollision(GameObject &prev, GameObjectListNode &node);
-//		void			checkBounds(GameObject &obj);
+//		void		renderObjects(WINDOW *window) const;
+		void		updateObjects(void);
+//		void		handleCollision(GameObject &prev, GameObjectListNode &node);
+//		void		checkBounds(GameObject &obj);
 
 };
 

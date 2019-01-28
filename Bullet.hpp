@@ -21,6 +21,7 @@ class BulletObject : public LivingObject
 	
 	public:
 		bool	destroyOutOfBounds;
+		BulletObject(void);
 		BulletObject( bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv);
 		BulletObject(BulletObject& copy);
 		~BulletObject(void);

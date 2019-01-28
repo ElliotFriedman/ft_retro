@@ -2,6 +2,8 @@
 #include "Bullet.hpp"
 #include <iostream>
 
+BulletObject::BulletObject(void) {};
+
 BulletObject::BulletObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv) : LivingObject(_enemy, _entity, _xp, _yp, _xv, _yv, 1)
 {
 	std::cout << "Bullet Object Constructor Called\n";

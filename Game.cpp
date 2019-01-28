@@ -1,14 +1,13 @@
 #include <Game.hpp>
-#include <GameObjectList.hpp>
 #include <Enemy.hpp>
 #include <chrono>
 #include <LivingObject.hpp>
 
 Game::Game(int _w, int _h):
 	w(_w), h(_h) {
-		map = new LivingObject**[w];
+		map = new LivingObject*[h];
 		for (int x = 0; x < h; x++) {
-			map[x] = new LivingObject*;
+			map[x] = new LivingObject[w]();
 		}
 	}
 
@@ -26,16 +25,16 @@ Game	&Game::operator=(Game &rhs) {
 	return *this;
 }
 
-void	Game::renderObjects(WINDOW *window) const {
-	GameObjectListNode	*node;
+// void	Game::renderObjects(WINDOW *window) const {
+// 	GameObjectListNode	*node;
 
-	node = objects.getHead();
-	while (node) {
-		node->obj->render(window);
-		node = node->next;
-	}
-	wrefresh(window);
-}
+// 	node = objects.getHead();
+// 	while (node) {
+// 		node->obj->render(window);
+// 		node = node->next;
+// 	}
+// 	wrefresh(window);
+// }
 
 /*
  ** for each x, y between prev and obj, check map for other objects and handle
@@ -77,27 +76,54 @@ void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
-void	Game::checkBounds(LivingObject &obj) {
+int		Game::checkBounds(LivingObject &obj) {
 	int x = obj.getX();
 	int y = obj.getY();
 	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
-		// 
+		obj.setDead();
+		return (0);
 	}
+	return (1);
 }
 
+int		Game::checkCollision(int x, int y)
+{
+	int vec_x = map[y][x].getVecX();
+	int vec_y  = map[y][x].getVecY();
+
+	if (!map[y + vec_y][x + vec_x].isAlive())
+	{
+		map[y][x].setDead();
+		map[y + vec_y][x + vec_x].setDead();
+		return 0;
+	}
+	return 1;
+}
+
+int		Game::moveObject(int x, int y)
+{
+	int vec_x = map[y][x].getVecX();
+	int vec_y  = map[y][x].getVecY();
+
+	map[y + vec_y][x + vec_x] = map[y][x];
+	map[y][x].setDead();
+}
+
+
 /*
- ** Update objects, check for collisions, delete if necesary
+ ** Runs through map/array. Checks for border bounds, collision. Then moves
  */
 void	Game::updateObjects(void) {
-	GameObjectListNode	*node;
-
-	node = objects.getHead();
-	while (node) {
-		LivingObject prev(*node->obj);
-		node->obj->update();
-		checkBounds(*node->obj);
-		handleCollision(prev, *node);
-		node = node->next;
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j  < w; j++)
+		{
+			if (map[i][j].getCount() > 0 && map[i][j].getCount() == frame_count)	//node in 2d map is 'alive' and other items can be assessed
+			{
+				if (checkBounds(map[i][j]) && checkCollision(j, i))//if colision occurs, remove the lesser live item. If requal.. remove both
+					moveObject(j, i);	//moves object and also updates in framecount
+			}
+		}
 	}
 }
 
