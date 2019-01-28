@@ -80,30 +80,11 @@ int main(int argc, char *argv[])
 
 	mvaddch(starty, startx, '^');
 
-	//	nodelay(my_win, false);
-	halfdelay(1);
 	int i = 0;
-	//	for (int x = COLS / 2; x < COLS * 3 / 4; x++)
-	//	{
-	//		mvvline(0, x, '^', LINES);
-	//	}
 	int storx[LEN];
 	int	story[LEN];
-	/*	for (int x = 0; x < LEN; x++)
-		{
-		int y = std::rand() % 10;
-		int sx = std::rand() % LEN;
-
-		if (std::rand() % 2)
-		{
-		mvaddch(y, sx, 'b');
-		storx[x] = sx;
-		story[x] = y;
-		}
-		}
-		*/
-	timeout(1);
-	wtimeout(my_win, 1);
+	timeout(20);
+//	wtimeout(my_win, 1);
 	seedMap(storx, story, 0);
 	int storx1[LEN];
 	int	story1[LEN];
