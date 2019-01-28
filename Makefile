@@ -4,7 +4,7 @@ CLASSES = Game GameObjectList #GameObject
 MODULES = #main
 
 CXX = clang++
-CPPFLAGS += -Wall -Wextra -Werror -Wpedantic -I ./
+CPPFLAGS += -Wall -Wextra -Werror -I ./
 
 CLS_SRC = $(addsuffix .cpp, $(CLASSES))
 SRC = $(CLS_SRC) $(addsuffix .cpp, $(MODULES))
