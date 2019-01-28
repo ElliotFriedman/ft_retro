@@ -87,7 +87,8 @@ int		Game::moveObject(int x, int y)
 	int vec_x = map[y][x].getVecX();
 	//	int vec_y  = map[y][x].getVecY();
 	map[y][x + vec_x] = map[y][x];
-	map[y][x+vec_x].setPX(x+vec_x);
+	//map[y][x+vec_x].setPX(x+vec_x);
+	map[y][x+vec_x].setEntity(map[y][x].getEntity(), x+vec_x, y);
 	map[y][x].setDead();
 
 	
