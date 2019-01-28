@@ -14,6 +14,7 @@
 #define  LIVINGOBJECT_HPP
 
 
+
 class LivingObject
 {
 	protected:
@@ -28,7 +29,7 @@ class LivingObject
 	
 	public:
 		LivingObject(void);
-		LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives);
+		LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives, int _framecount);
 		LivingObject(LivingObject& copy);
 		virtual ~LivingObject(void);
 		LivingObject& operator=(LivingObject& copyFrom);
@@ -44,12 +45,6 @@ class LivingObject
 		int				getVecX(void);
 		int				getVecY(void);
 		int				liveChange(int number);
-		//int				getRand(void);//
-		//void			generateEnemies(void);//
-
-		//void			setEnemy(int xp, int yp, int xv, int yv);//
-		//void			setBullet(int xp, int yp, int xv, int yv);//
-		//void			setPlayer(int xp, int yp, int xv, int yv);//
 		
 		void			upFramecount(void);
 		int				getFramecount(void);

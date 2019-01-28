@@ -13,7 +13,7 @@
 #include "LivingObject.hpp"
 #include <iostream>
 
-LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives)// : enemy(_enemy), entity(_entity), xp(_xp), yp(_yp), xv(_xv), yv(_yv), lives(_lives)
+LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv, int _yv, int _lives, int _framecount)// : enemy(_enemy), entity(_entity), xp(_xp), yp(_yp), xv(_xv), yv(_yv), lives(_lives)
 {
 	xp = _xp;
 	yp = _yp;
@@ -23,13 +23,14 @@ LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv,
 	entity = _entity;	
 	lives = _lives;
 	std::cout << "Living Object Constructor Called\n";
+	framecount = _framecount;
 	if (lives < 1)
 		std::cout << "Error, you must initialize a living object with lives\n\n";
 }
 
 LivingObject::LivingObject(void) {
-	alive = -1;
-	entity = 'E';
+	framecount = -1;
+	entity = ' ';
 };
 
 LivingObject::LivingObject(LivingObject& copy)// : LivingObject(copy.enemy, copy.entity, copy.xp, copy.yp, copy.xv, copy.yv)
@@ -42,6 +43,7 @@ LivingObject::LivingObject(LivingObject& copy)// : LivingObject(copy.enemy, copy
 	entity = copy.entity;	
 	lives = copy.lives;
 	lives = copy.lives;
+	framecount = copy.framecount;
 	std::cout << "Living Object Copy Constructor Called\n";
 }
 
@@ -59,6 +61,7 @@ LivingObject&  LivingObject::operator=(LivingObject& copyFrom)
 	enemy = copyFrom.enemy;
 	entity = copyFrom.entity;	
 	lives = copyFrom.lives;
+	framecount = copyFrom.framecount;
 	return *this;
 }
 
@@ -98,8 +101,6 @@ bool			LivingObject::takeDamage(void)
 	std::cout << "Took damage\n";
 	return --lives > 0 ? true : false;
 }
-
-
 
 void				LivingObject::setDead(void)
 {

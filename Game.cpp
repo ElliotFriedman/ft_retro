@@ -43,12 +43,6 @@ Game	&Game::operator=(Game &rhs) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
-<<<<<<< HEAD
-int		Game::checkBounds(LivingObject &obj) {
-	int x = obj.getX() + obj.getVecX();
-	int y = obj.getY() + obj.getVecY();
-	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
-=======
 int		Game::checkBounds(LivingObject &obj)
 {
 	int x = obj.getX();
@@ -58,7 +52,6 @@ int		Game::checkBounds(LivingObject &obj)
 
 	if ((x < 0 || x >= w) || (y < 0 || y >= h) || (nextPOS >= w))
 	{
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 		obj.setDead();
 		return (0);
 	}
@@ -69,14 +62,10 @@ int		Game::checkCollision(int x, int y)
 {
 	int vec_x = map[y][x].getVecX();
 
-<<<<<<< HEAD
-	if (map[y + vec_y][x + vec_x].getFramecount() > 0)
-=======
 	int i = x;
 	while (i < x + vec_x)
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 	{
-		if (map[y][x + i].isAlive())
+		if (map[y][x + i].getFramecount() > 0)
 		{
 			map[y][x].setDead();
 			map[y][x + i].setDead();
@@ -133,28 +122,33 @@ void	Game::dumpMap(void)
 		}
 		std::cout << "\n";
 	}
-<<<<<<< HEAD
-}
-=======
 }
 
-void	Game::testLitterMap(void)
+// void	Game::testLitterMap(void)
+// {
+// 	int total = 0;
+// 	for(int y = 0; y < h; y++)
+// 	{
+// 		for (int x = 0; x < w; x++)
+// 		{
+// 			if (total % 5 == 0)
+// 				map[y][x].setEntity('E');
+// 			else if (total % 7 == 0)
+// 				map[y][x].setEntity('.');
+// 			else
+// 				map[y][x].setEntity(' ');
+// 			total++;
+// 		}
+// 	}
+// }
+
+void	Game::setBullet(bool enemy, int xp, int yp, int xv, int yv)
 {
-	int total = 0;
-	for(int y = 0; y < h; y++)
-	{
-		for (int x = 0; x < w; x++)
-		{
-			if (total % 5 == 0)
-				map[y][x].setEntity('E');
-			else if (total % 7 == 0)
-				map[y][x].setEntity('.');
-			else
-				map[y][x].setEntity(' ');
-			total++;
-		}
-	}
+	yv = 0;
+	LivingObject created(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
+	map[xp][yp] = created;
 }
+
 WINDOW *create_newwin(int height, int width, int starty, int startx)
 {
 	WINDOW *local_win;
@@ -320,4 +314,3 @@ void	Game::run(void)
 	
 
 }
->>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
