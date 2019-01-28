@@ -3,20 +3,28 @@
 #include "LivingObject.hpp"
 #include <iostream>
 
-Game::Game(int _w, int _h):
-	w(_w), h(_h) {
-		map = new LivingObject*[h];
-		for (int x = 0; x < h; x++) {
-			map[x] = new LivingObject[w]();
-		}
+Game::Game(int _w, int _h) : w(_w), h(_h)
+{
+	map = new LivingObject*[h];
+	for (int x = 0; x < h; x++) {
+		map[x] = new LivingObject[w]();
 	}
-
-Game::Game(Game &copyFrom):
-	w(copyFrom.w), h(copyFrom.h) {
-		map = copyFrom.map;
 }
 
-Game::~Game() {};
+Game::Game(Game &copyFrom): w(copyFrom.w), h(copyFrom.h)
+{
+	map = copyFrom.map;
+}
+
+Game::~Game()
+{
+	for (int x = 0; x < h; x++)
+	{
+		delete[] map[x];
+	}
+	delete[] map;
+
+}
 
 Game	&Game::operator=(Game &rhs) {
 	w = rhs.w;
@@ -55,11 +63,13 @@ int		Game::checkCollision(int x, int y)
 
 int		Game::moveObject(int x, int y)
 {
+	if (w > x || 
 	int vec_x = map[y][x].getVecX();
 	int vec_y  = map[y][x].getVecY();
 
 	map[y + vec_y][x + vec_x] = map[y][x];
 	map[y][x].setDead();
+	return 
 }
 
 
