@@ -4,7 +4,7 @@ CLASSES = Game LivingObject main #GameObject
 MODULES = #main
 
 CXX = clang++
-CPPFLAGS += -Wall -Wextra -Werror -I ./
+CPPFLAGS += -Wall -Wextra -Werror -I ./ -g -fsanitize=address
 
 CLS_SRC = $(addsuffix .cpp, $(CLASSES))
 SRC = $(CLS_SRC) $(addsuffix .cpp, $(MODULES))

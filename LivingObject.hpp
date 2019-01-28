@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 23:25:22 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:49:57 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class LivingObject
 		LivingObject(LivingObject& copy);
 		virtual ~LivingObject(void);
 		LivingObject& operator=(LivingObject& copyFrom);
+		LivingObject* operator=(LivingObject* copyFrom);
 		int				getLives(void) const;
 		void			update(void);
 		void			shift(void);

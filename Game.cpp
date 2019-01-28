@@ -15,6 +15,10 @@ Game::Game(int _w, int _h) : w(_w), h(_h)
 	for (int x = 0; x < h; x++)
 	{
 		map[x] = new LivingObject*[w]();
+		for (int i = 0; i < w; i++)
+		{
+			map[x][i] = new LivingObject();
+		}
 	}
 }
 
@@ -145,7 +149,7 @@ void	Game::setBullet(bool enemy, int xp, int yp, int xv, int yv)
 {
 	yv = 0;
 	LivingObject *created = new LivingObject(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
-	map[xp][yp] = created;
+	*map[xp][yp] = created;
 }
 
 WINDOW *create_newwin(int height, int width, int starty, int startx)

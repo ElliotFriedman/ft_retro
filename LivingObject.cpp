@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 23:47:41 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:50:20 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@ LivingObject::~LivingObject(void)
 {
 	std::cout << "Living Object Destructor Called\n";
 }
+
+LivingObject*  LivingObject::operator=(LivingObject* copyFrom)
+{
+	xp = copyFrom->xp;
+	yp = copyFrom->yp;
+	xv = copyFrom->xv;
+	yv = copyFrom->yv;
+	enemy = copyFrom->enemy;
+	entity = copyFrom->entity;	
+	lives = copyFrom->lives;
+	framecount = copyFrom->framecount;
+	return this;
+}
+
 
 LivingObject&  LivingObject::operator=(LivingObject& copyFrom)
 {
