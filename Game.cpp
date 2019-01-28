@@ -12,7 +12,8 @@
 Game::Game(int _w, int _h) : w(_w), h(_h)
 {
 	map = new LivingObject**[h];
-	for (int x = 0; x < h; x++) {
+	for (int x = 0; x < h; x++)
+	{
 		map[x] = new LivingObject*[w]();
 	}
 }
@@ -110,17 +111,17 @@ void	Game::updateObjects(void)
 	}
 }
 
-void	Game::dumpMap(void)
-{
-	for (int y = 0; y < h; y++)
-	{
-		for (int x = 0; x < w; x++)
-		{
-			std::cout << map[y][x].getEntity();
-		}
-		std::cout << "\n";
-	}
-}
+// void	Game::dumpMap(void)
+// {
+// 	for (int y = 0; y < h; y++)
+// 	{
+// 		for (int x = 0; x < w; x++)
+// 		{
+// 			std::cout << map[y][x].getEntity();
+// 		}
+// 		std::cout << "\n";
+// 	}
+// }
 
 // void	Game::testLitterMap(void)
 // {
@@ -143,7 +144,8 @@ void	Game::dumpMap(void)
 void	Game::setBullet(bool enemy, int xp, int yp, int xv, int yv)
 {
 	yv = 0;
-	map[xp][yp] = //(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
+	LivingObject *created = new LivingObject(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
+	map[xp][yp] = created;
 }
 
 WINDOW *create_newwin(int height, int width, int starty, int startx)
