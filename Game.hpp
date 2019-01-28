@@ -6,7 +6,11 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/01/27 21:53:25 by efriedma         ###   ########.fr       */
+=======
+/*   Updated: 2019/01/27 20:01:09 by efriedma         ###   ########.fr       */
+>>>>>>> 1722de01f396a38af148df4d9f2978ae563e7a1b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +51,7 @@ class Game
 		//void			setEnemy(int xp, int yp, int xv, int yv);//
 		void			setBullet(bool enemy, int xp, int yp, int xv, int yv);
 		//void			setPlayer(int xp, int yp, int xv, int yv);//
-	private:
+	// private:
 		void		updateObjects(void);
 
 };
