@@ -6,14 +6,14 @@
 #include <iostream>
 
 #define EMPTY     ' '
-#define LEN       400
+#define LEN       500
 
 
 Game::Game(int _w, int _h) : w(_w), h(_h)
 {
-	map = new LivingObject*[h];
+	map = new LivingObject**[h];
 	for (int x = 0; x < h; x++) {
-		map[x] = new LivingObject[w]();
+		map[x] = new LivingObject*[w]();
 	}
 }
 
@@ -60,15 +60,15 @@ int		Game::checkBounds(LivingObject &obj)
 
 int		Game::checkCollision(int x, int y)
 {
-	int vec_x = map[y][x].getVecX();
+	int vec_x = map[y][x]->getVecX();
 
 	int i = x;
 	while (i < x + vec_x)
 	{
-		if (map[y][x + i].getFramecount() > 0)
+		if (map[y][x + i]->getFramecount() > 0)
 		{
-			map[y][x].setDead();
-			map[y][x + i].setDead();
+			map[y][x]->setDead();
+			map[y][x + i]->setDead();
 			return 0;
 		}	 
 		i++;
@@ -79,14 +79,14 @@ int		Game::checkCollision(int x, int y)
 int		Game::moveObject(int x, int y)
 {
 	//	if (w > x ||) 
-	int vec_x = map[y][x].getVecX();
+	int vec_x = map[y][x]->getVecX();
 	//	int vec_y  = map[y][x].getVecY();
 	map[y][x + vec_x] = map[y][x];
-	map[y][x].setDead();
+	map[y][x]->setDead();
 
 	mvaddch(y, vec_x + x, ' ');
 	//integrate this framecount
-	mvaddch(y, vec_x + x, map[y][vec_x + x].getEntity());
+	mvaddch(y, vec_x + x, map[y][vec_x + x]->getEntity());
 
 	return 1;
 }
@@ -101,9 +101,9 @@ void	Game::updateObjects(void)
 	{
 		for (int j = 0; j  < w; j++)
 		{
-			if (map[i][j].getFramecount() > 0 && map[i][j].getFramecount() == frame_count)	//node in 2d map is 'alive' and other items can be assessed
+			if (map[i][j]->getFramecount() > 0 && map[i][j]->getFramecount() == frame_count)	//node in 2d map is 'alive' and other items can be assessed
 			{
-				if (checkBounds(map[i][j]) && checkCollision(j, i))//if colision occurs, remove the lesser live item. If requal.. remove both
+				if (checkBounds(*map[i][j]) && checkCollision(j, i))//if colision occurs, remove the lesser live item. If requal.. remove both
 					moveObject(j, i);	//moves object and also updates in framecount
 			}
 		}
@@ -143,8 +143,7 @@ void	Game::dumpMap(void)
 void	Game::setBullet(bool enemy, int xp, int yp, int xv, int yv)
 {
 	yv = 0;
-	LivingObject created(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
-	map[xp][yp] = created;
+	map[xp][yp] = //(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
 }
 
 WINDOW *create_newwin(int height, int width, int starty, int startx)
@@ -223,14 +222,16 @@ void	Game::run(void)
 	std::chrono::time_point<std::chrono::system_clock> start, end; 
 	std::chrono::duration<double> elapsed_seconds;
 
-
-	timeout(20);
 	srand(std::time(nullptr));
 	initscr();
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
 	refresh();
+	timeout(20);
+	winRefresh(storx1, story1, LINES -  10);
+	winRefresh(storx, story, 0);
+
 
 	height = 1;
 	width = 1;
@@ -295,8 +296,7 @@ void	Game::run(void)
 				}
 				break;
 			case 32:
-				bulletx = startx + 1;
-				bullety = starty;
+				setBullet(false, startx + 1, starty, 5, 0);
 				//		std::cout << "Hit space bar\n";
 				mvaddch(bullety, bulletx, '*');
 				break;

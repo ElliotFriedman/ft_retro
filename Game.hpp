@@ -27,7 +27,7 @@ class Game
 		int	w;
 		int	h;
 		int frame_count;	//keep track of frame count. When objects on map are alive they will keep the frame count in alive to know its been updated each frame
-		LivingObject	**map;
+		LivingObject	***map;
 		LivingObject	*player;
 	public:
 		Game(int _w, int _h);
