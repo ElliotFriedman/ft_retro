@@ -297,8 +297,7 @@ void	Game::run(void)
 				}
 				break;
 			case 32:
-				bulletx = startx + 1;
-				bullety = starty;
+				setBullet(false, startx + 1, starty, 5, 0);
 				//		std::cout << "Hit space bar\n";
 				mvaddch(bullety, bulletx, '*');
 				break;
