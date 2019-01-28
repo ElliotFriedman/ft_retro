@@ -1,6 +1,6 @@
 #include <GameObjectList.hpp>
 
-/* Node */
+/* Node 
 
 GameObjectListNode::GameObjectListNode(GameObject &obj):
 	obj(obj), next(nullptr), prev(nullptr)
@@ -19,8 +19,9 @@ GameObjectListNode::GameObjectListNode(GameObjectListNode& copyFrom) {
 GameObjectListNode::GameObjectListNode	&GameObjectListNode::operator=(GameObjectListNode &rhs) {
 
 }
+*/
 
-/* List */
+/* List 
 
 GameObjectList::GameObjectList(void): head(nullptr) {
 	
@@ -51,3 +52,4 @@ void	GameObjectList::remove(GameObjectListNode &node) {
 		
 	}
 }
+*/

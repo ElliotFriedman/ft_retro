@@ -1,10 +1,10 @@
 NAME = a.out
 
-CLASSES = Game GameObjectList #GameObject
+CLASSES = Game GameObjectList LivingObject Bullet Enemy Player #GameObject
 MODULES = #main
 
 CXX = clang++
-CPPFLAGS += -Wall -Wextra -Werror -Wpedantic -I ./
+CPPFLAGS += -Wall -Wextra -Werror -I ./
 
 CLS_SRC = $(addsuffix .cpp, $(CLASSES))
 SRC = $(CLS_SRC) $(addsuffix .cpp, $(MODULES))

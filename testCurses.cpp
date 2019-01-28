@@ -6,7 +6,7 @@
 /*   By: efriedma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 17:19:10 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/27 17:25:09 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/27 18:51:27 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	winRefresh(int storx[LEN], int story[LEN], int yOff)
 	}
 }
 
-int main(int argc, char *argv[])
+int main()
 {
 	WINDOW *my_win;
 	int startx, starty, width, height;
@@ -107,13 +107,26 @@ int main(int argc, char *argv[])
 
 	std::chrono::duration<double> elapsed_seconds;
 
+	int bulletx = 0;
+	int bullety = 0;
+
 
 	while ((ch = getch()) != KEY_F(1))
 	{
+		if (bullety)
+			mvaddch(bullety, bulletx, ' ');
+		if (bullety)
+		{
+			bulletx += 5;
+			mvaddch(bullety, bulletx, '*');
+		}
+
+
+
 		winRefresh(storx1, story1, LINES -  10);
 		winRefresh(storx, story, 0);
-		mvaddch(starty, startx, '^');
 		move(starty, startx);
+		mvaddch(starty, startx, '>');
 		end = std::chrono::system_clock::now();
 		start = std::chrono::system_clock::now();
 		elapsed_seconds = end - start;
@@ -153,7 +166,13 @@ int main(int argc, char *argv[])
 					mvaddch(starty, startx, ' ');
 					starty++;
 				}
-				break;	
+				break;
+			case 32:
+				bulletx = startx + 1;
+				bullety = starty;
+				std::cout << "Hit space bar\n";
+				mvaddch(bullety, bulletx, '*');
+				break;
 			default:
 				break;
 		}

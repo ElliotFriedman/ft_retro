@@ -4,21 +4,22 @@
 #include <chrono>
 #include <LivingObject.hpp>
 
-Game::Game(int _w, int _h):
-	w(_w), h(_h) {
+Game::Game(int _w, int _h): w(_w), h(_h)
+{
 		map = new LivingObject**[w];
 		for (int x = 0; x < h; x++) {
 			map[x] = new LivingObject*;
 		}
-	}
+}
 
-Game::Game(Game &copyFrom):
-	w(copyFrom.w), h(copyFrom.h) {
+Game::Game(Game &copyFrom): w(copyFrom.w), h(copyFrom.h)
+{
 		objects = copyFrom.objects;
 		map = copyFrom.map;
 	}
 
-Game	&Game::operator=(Game &rhs) {
+Game	&Game::operator=(Game &rhs) 
+{
 	w = rhs.w;
 	h = rhs.h;
 	objects = rhs.objects;
@@ -26,7 +27,8 @@ Game	&Game::operator=(Game &rhs) {
 	return *this;
 }
 
-void	Game::renderObjects(WINDOW *window) const {
+void	Game::renderObjects(WINDOW *window) const 
+{
 	GameObjectListNode	*node;
 
 	node = objects.getHead();
@@ -42,7 +44,8 @@ void	Game::renderObjects(WINDOW *window) const {
  ** remove node from list if an object gets destroyed
  ** update the map with the new positions
  */
-void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node) {
+void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node)
+{
 	int	sy = MIN(prev.getY(), node.obj->getY());
 	int	my = MAX(prev.getY(), node.obj->getY());
 	int	sx = MIN(prev.getX(), node.obj->getX());
@@ -77,22 +80,25 @@ void	Game::handleCollision(LivingObject &prev, GameObjectListNode &node) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
-void	Game::checkBounds(LivingObject &obj) {
+void	Game::checkBounds(LivingObject &obj)
+{
 	int x = obj.getX();
 	int y = obj.getY();
 	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
-		// 
+		
 	}
 }
 
 /*
  ** Update objects, check for collisions, delete if necesary
  */
-void	Game::updateObjects(void) {
-	GameObjectListNode	*node;
-
-	node = objects.getHead();
-	while (node) {
+void	Game::updateObjects(void)
+{
+//	GameObjectListNode	*node;
+//	node = objects.getHead();
+	
+	while (node)
+	{
 		LivingObject prev(*node->obj);
 		node->obj->update();
 		checkBounds(*node->obj);
@@ -101,8 +107,16 @@ void	Game::updateObjects(void) {
 	}
 }
 
-void	Game::run(WINDOW *window) {
-	//std::high_resolution_clock::time_point fps24;
+void	Game::run(WINDOW *window)
+{
+//	Enemy 	w(_w), h(_h) {
+		map = new LivingObject*[w];
+		for (int x = 0; x < h; x++) {
+			map[x] = new LivingObject*;
+		}
+	}
+
+
 	std::chrono::time_point<std::chrono::system_clock> start, end; 
 	std::chrono::duration<double> elapsed_seconds;
 
@@ -111,10 +125,8 @@ void	Game::run(WINDOW *window) {
 	end = std::chrono::system_clock::now(); 
 	elapsed_seconds = end - start;
 
-	while (true) { //TODO: Limit frame rate
-		//		int i = 0;
-		//		while ( i < 48 )
-		//		{
+	while (true)
+	{
 		end = std::chrono::system_clock::now();
 		start = std::chrono::system_clock::now();
 		elapsed_seconds = end - start;
@@ -126,13 +138,6 @@ void	Game::run(WINDOW *window) {
 			elapsed_seconds = end - start;
 			end = std::chrono::system_clock::now();
 		}
-		//			i++;
-		//update 48 times a second
 		renderObjects(window);
-		//			std::cout << std::to_string(i) + "\n";
-		//		}
-
-		//updateObjects();
-		//renderObjects(window);
 	}
 }
