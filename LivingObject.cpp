@@ -29,6 +29,7 @@ LivingObject::LivingObject(bool _enemy, char _entity, int _xp, int _yp, int _xv,
 
 LivingObject::LivingObject(void) {
 	alive = -1;
+	entity = 'E';
 };
 
 LivingObject::LivingObject(LivingObject& copy)// : LivingObject(copy.enemy, copy.entity, copy.xp, copy.yp, copy.xv, copy.yv)
@@ -73,11 +74,11 @@ void	LivingObject::update(void)
 }
 
 //virtual and will be overriden in child classes
-void	LivingObject::render(WINDOW *window) const
-{
-	//make ncurses call with char entity
-	mvwaddch(window, yp, xp, entity);
-}
+// void	LivingObject::render(WINDOW *window) const
+// {
+// 	//make ncurses call with char entity
+// 	mvwaddch(window, yp, xp, entity);
+// }
 
 int				LivingObject::getX(void) const
 {

@@ -13,7 +13,7 @@
 #ifndef LIVINGOBJECT_HPP
 #define  LIVINGOBJECT_HPP
 
-#include "GameObject.hpp"
+//#include "GameObject.hpp"
 
 class LivingObject// : public GameObject
 {
@@ -46,7 +46,7 @@ class LivingObject// : public GameObject
 		int				getY(void) const;
 		bool			isEnemy(void) const;
 		char			getEntity(void) const;
-		virtual void	render(WINDOW *window) const;
+//		virtual void	render(WINDOW *window) const;
 		bool			takeDamage(void);
 		int				getCount(void);
 		void			setAlive(int number);
