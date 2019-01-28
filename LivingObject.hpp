@@ -17,7 +17,7 @@
 class LivingObject
 {
 	protected:
-		int		alive;
+		int		framecount;
 		int		lives;
 		int		xp;
 		int		yp;
@@ -40,14 +40,20 @@ class LivingObject
 		bool			isEnemy(void) const;
 		char			getEntity(void) const;
 		bool			takeDamage(void);
-		int				getCount(void);
-		void			setAlive(int number);
 		void			setDead(void);
 		int				getVecX(void);
 		int				getVecY(void);
-		int				isAlive(void);
 		int				liveChange(int number);
-		void			setEntity(char E);
+		//int				getRand(void);//
+		//void			generateEnemies(void);//
+
+		//void			setEnemy(int xp, int yp, int xv, int yv);//
+		//void			setBullet(int xp, int yp, int xv, int yv);//
+		//void			setPlayer(int xp, int yp, int xv, int yv);//
+		
+		void			upFramecount(void);
+		int				getFramecount(void);
+		void			setFramecount(int number);
 };
 
 #endif

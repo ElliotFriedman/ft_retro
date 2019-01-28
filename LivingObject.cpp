@@ -99,19 +99,11 @@ bool			LivingObject::takeDamage(void)
 	return --lives > 0 ? true : false;
 }
 
-int				LivingObject::getCount(void)
-{
-	return (alive);
-}
 
-void				LivingObject::setAlive(int number)
-{
-	this->alive = number;
-}
 
 void				LivingObject::setDead(void)
 {
-	this->alive = -1;
+	this->framecount = -1;
 }
 
 int				LivingObject::getVecX(void)
@@ -124,11 +116,19 @@ int				LivingObject::getVecY(void)
 	return (this->yv);
 }
 
-int				LivingObject::isAlive(void)
+void			LivingObject::upFramecount(void)
 {
-	if (this->alive > 0)
-		return 1;
-	return 0;
+	this->framecount += 1;
+}
+
+int				LivingObject::getFramecount(void)
+{
+	return this->framecount;
+}
+
+void			LivingObject::setFramecount(int number)
+{
+	this->framecount = number;
 }
 
 /*
@@ -143,7 +143,7 @@ int			LivingObject::liveChange(int number)
 	return 0;
 }
 
-void		LivingObject::setEntity(char E)
-{
-	this->entity = E;
-}
+// void		LivingObject::setEntity(char E)
+// {
+// 	this->entity = E;
+// }
