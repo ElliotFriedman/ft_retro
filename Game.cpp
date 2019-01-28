@@ -152,8 +152,8 @@ void	Game::testLitterMap(void)
 void	Game::setBullet(bool enemy, int xp, int yp, int xv, int yv)
 {
 	yv = 0;
-	//LivingObject *created = new LivingObject(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
-	map[yp][xp].createBullet(enemy, xp, yp, xv, yv, frame_count);
+	LivingObject *created = new LivingObject(enemy, BULLET, xp, yp, xv, 0, 1, frame_count);
+	*map[xp][yp] = created;
 }
 
 WINDOW *create_newwin(int height, int width, int starty, int startx)
