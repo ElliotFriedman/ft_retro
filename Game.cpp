@@ -6,7 +6,7 @@
 #include <iostream>
 
 #define EMPTY     ' '
-#define LEN       400
+#define LEN       500
 
 
 Game::Game(int _w, int _h) : w(_w), h(_h)
@@ -223,14 +223,16 @@ void	Game::run(void)
 	std::chrono::time_point<std::chrono::system_clock> start, end; 
 	std::chrono::duration<double> elapsed_seconds;
 
-
-	timeout(20);
 	srand(std::time(nullptr));
 	initscr();
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
 	refresh();
+	timeout(20);
+	winRefresh(storx1, story1, LINES -  10);
+	winRefresh(storx, story, 0);
+
 
 	height = 1;
 	width = 1;

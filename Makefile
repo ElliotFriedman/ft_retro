@@ -1,6 +1,6 @@
 NAME = a.out
 
-CLASSES = Game GameObjectList #GameObject
+CLASSES = Game LivingObject main #GameObject
 MODULES = #main
 
 CXX = clang++
