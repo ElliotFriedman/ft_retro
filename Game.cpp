@@ -78,18 +78,16 @@ int		Game::checkCollision(int x, int y)
 
 int		Game::moveObject(int x, int y)
 {
-//	if (w > x ||) 
+	//	if (w > x ||) 
 	int vec_x = map[y][x].getVecX();
-//	int vec_y  = map[y][x].getVecY();
+	//	int vec_y  = map[y][x].getVecY();
 	map[y][x + vec_x] = map[y][x];
 	map[y][x].setDead();
-	
 
-//integrate this framecount
-	
+	mvaddch(y, vec_x + x, ' ');
+	//integrate this framecount
+	mvaddch(y, vec_x + x, map[y][vec_x + x].getEntity());
 
-
-	
 	return 1;
 }
 
@@ -202,57 +200,56 @@ void	winRefresh(int storx[LEN], int story[LEN], int yOff)
 	}
 }
 
+
+
 void	Game::run(void)
 {
 	WINDOW *my_win;
+
+	LivingObject	*p = new LivingObject(false, '>', 20, LINES - 1, 0, 0, 1, frame_count);
+	int bulletx = 0;
+	int bullety = 0;
+
 	int startx, starty, width, height;
 	int ch;
+	int i = 0;
+	int storx[LEN];
+	int	story[LEN];
+	int storx1[LEN];
+	int	story1[LEN];
+	seedMap(storx1, story1, LINES - 10);
+	seedMap(storx, story, 0);
 
+	std::chrono::time_point<std::chrono::system_clock> start, end; 
+	std::chrono::duration<double> elapsed_seconds;
+
+
+	timeout(20);
 	srand(std::time(nullptr));
 	initscr();
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
+	refresh();
 
 	height = 1;
 	width = 1;
 	starty = (LINES - height) / 2;
-	startx = 30;//(COLS - width) / 2;
-	refresh();
+	startx = 20;//(COLS - width) / 2;
 	my_win = newwin(height, width, starty, startx);
-
-	int i = 0;
-	int storx[LEN];
-	int	story[LEN];
-	seedMap(storx, story, 0);
-	int storx1[LEN];
-	int	story1[LEN];
-	seedMap(storx1, story1, LINES - 10);
-
-	timeout(20);
-	std::chrono::time_point<std::chrono::system_clock> start, end; 
-
-	start = std::chrono::system_clock::now(); 
-	end = std::chrono::system_clock::now(); 
-
-	std::chrono::duration<double> elapsed_seconds;
-
-	int bulletx = 0;
-	int bullety = 0;
-
 
 	while ((ch = getch()) != KEY_F(1))
 	{
-		if (bullety)
-			mvaddch(bullety, bulletx, ' ');
-		if (bullety)
-		{
-			bulletx += 5;
-			mvaddch(bullety, bulletx, '*');
-		}
+		/*		if (bullety)
+				mvaddch(bullety, bulletx, ' ');
+				if (bullety)
+				{
+				bulletx += 5;
+				mvaddch(bullety, bulletx, '*');
+				}
+				*/
 
-
-
+		updateObjects();
 		winRefresh(storx1, story1, LINES -  10);
 		winRefresh(storx, story, 0);
 		move(starty, startx);
@@ -300,7 +297,7 @@ void	Game::run(void)
 			case 32:
 				bulletx = startx + 1;
 				bullety = starty;
-				std::cout << "Hit space bar\n";
+				//		std::cout << "Hit space bar\n";
 				mvaddch(bullety, bulletx, '*');
 				break;
 			default:
@@ -310,7 +307,6 @@ void	Game::run(void)
 	}
 
 	endwin();
+	delete p;
 	std::cout << "ran loop " + std::to_string(i) + " times\n";
-	
-
 }
