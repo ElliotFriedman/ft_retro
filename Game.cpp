@@ -37,10 +37,15 @@ Game	&Game::operator=(Game &rhs) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
-int		Game::checkBounds(LivingObject &obj) {
+int		Game::checkBounds(LivingObject &obj)
+{
 	int x = obj.getX();
 	int y = obj.getY();
-	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
+
+	int nextPOS = obj.getVecX();
+
+	if ((x < 0 || x >= w) || (y < 0 || y >= h) || (nextPOS >= w))
+	{
 		obj.setDead();
 		return (0);
 	}
@@ -67,20 +72,27 @@ int		Game::checkCollision(int x, int y)
 
 int		Game::moveObject(int x, int y)
 {
-	if (w > x ||) 
-		int vec_x = map[y][x].getVecX();
-	int vec_y  = map[y][x].getVecY();
-
-	map[y + vec_y][x + vec_x] = map[y][x];
+//	if (w > x ||) 
+	int vec_x = map[y][x].getVecX();
+//	int vec_y  = map[y][x].getVecY();
+	map[y][x + vec_x] = map[y][x];
 	map[y][x].setDead();
-	return 
+	
+
+
+
+
+
+	
+	return 1;
 }
 
 
 /*
  ** Runs through map/array. Checks for border bounds, collision. Then moves
  */
-void	Game::updateObjects(void) {
+void	Game::updateObjects(void)
+{
 	for (int i = 0; i < h; i++)
 	{
 		for (int j = 0; j  < w; j++)
@@ -122,4 +134,10 @@ void	Game::testLitterMap(void)
 			total++;
 		}
 	}
+}
+
+void	Game::run(void)
+{
+
+
 }

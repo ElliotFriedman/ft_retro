@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 10:43:20 by efriedma          #+#    #+#             */
-/*   Updated: 2019/01/26 20:25:26 by efriedma         ###   ########.fr       */
+/*   Updated: 2019/01/27 20:01:09 by efriedma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Game
 		int			moveObject(int x, int y);
 		void		dumpMap(void);
 		void		testLitterMap(void);
+		void		run(void);
 	private:
 		void		updateObjects(void);
 
