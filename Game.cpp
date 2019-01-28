@@ -43,6 +43,12 @@ Game	&Game::operator=(Game &rhs) {
  ** check is obj is in bounds
  ** delete it if necesary, remove from object list and map
  */
+<<<<<<< HEAD
+int		Game::checkBounds(LivingObject &obj) {
+	int x = obj.getX() + obj.getVecX();
+	int y = obj.getY() + obj.getVecY();
+	if ((x < 0 || x >= w) || (y < 0 || y >= h)) {
+=======
 int		Game::checkBounds(LivingObject &obj)
 {
 	int x = obj.getX();
@@ -52,6 +58,7 @@ int		Game::checkBounds(LivingObject &obj)
 
 	if ((x < 0 || x >= w) || (y < 0 || y >= h) || (nextPOS >= w))
 	{
+>>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 		obj.setDead();
 		return (0);
 	}
@@ -62,8 +69,12 @@ int		Game::checkCollision(int x, int y)
 {
 	int vec_x = map[y][x].getVecX();
 
+<<<<<<< HEAD
+	if (map[y + vec_y][x + vec_x].getFramecount() > 0)
+=======
 	int i = x;
 	while (i < x + vec_x)
+>>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
 	{
 		if (map[y][x + i].isAlive())
 		{
@@ -101,7 +112,7 @@ void	Game::updateObjects(void)
 	{
 		for (int j = 0; j  < w; j++)
 		{
-			if (map[i][j].getCount() > 0 && map[i][j].getCount() == frame_count)	//node in 2d map is 'alive' and other items can be assessed
+			if (map[i][j].getFramecount() > 0 && map[i][j].getFramecount() == frame_count)	//node in 2d map is 'alive' and other items can be assessed
 			{
 				if (checkBounds(map[i][j]) && checkCollision(j, i))//if colision occurs, remove the lesser live item. If requal.. remove both
 					moveObject(j, i);	//moves object and also updates in framecount
@@ -120,6 +131,9 @@ void	Game::dumpMap(void)
 		}
 		std::cout << "\n";
 	}
+<<<<<<< HEAD
+}
+=======
 }
 
 void	Game::testLitterMap(void)
@@ -302,3 +316,4 @@ void	Game::run(void)
 	delete p;
 	std::cout << "ran loop " + std::to_string(i) + " times\n";
 }
+>>>>>>> 4b30726ce47509ebc2d880ad2e88668e241710bf
